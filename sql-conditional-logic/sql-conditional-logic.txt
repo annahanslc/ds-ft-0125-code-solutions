@@ -1,0 +1,57 @@
+-- -- sql-conditional-logic -- --
+
+-- Part 1: 
+-- Q1: Write SQL statements to return data of the following questions:
+-- In the log_feature table, write the conditional logic with the following conditions:
+-- If the volume < 100, then make those records as “low”
+-- If the volume between 100 and 500, then make those records as “medium”
+-- If the volume > 500, then make those records as ”large”
+
+SELECT *,
+	CASE
+		WHEN lf.volume < 100 THEN 'low'
+		WHEN lf.volume BETWEEN 100 AND 500 THEN 'medium'
+		WHEN lf.volume > 500 THEN 'large'
+	END as volume_size
+FROM log_feature lf;
+
+-- Q2: From the query above, can you show the quantity of records for each “low”, “medium” and “large”?
+SELECT 
+	CASE
+		WHEN lf.volume < 100 THEN 'low'
+		WHEN lf.volume BETWEEN 100 AND 500 THEN 'medium'
+		WHEN lf.volume > 500 THEN 'large'
+	END as volume_1,
+	COUNT(*)
+FROM log_feature lf
+GROUP BY volume_1;
+
+-- Part 2: Write a conditional logic with the following conditions:
+-- If “HourlyRate” is greater and equal than 80, then make the records as “high hourly rate”
+-- If “HourlyRate” is between 40 and 80, then make the records as “medium hourly rate”
+-- If “HourlyRate” is less than 40, then make the records as “low hourly rate”
+-- Return the “EmployeeNumber”, “HourlyRate”, and the conditional logic result in the end
+
+SELECT EmployeeNumber, HourlyRate,
+	CASE 
+		WHEN HourlyRate >= 80 THEN 'high hourly rate'
+		WHEN HourlyRate BETWEEN 40 AND 80 THEN 'medium hourly rate'
+		WHEN HourlyRate <= 40 THEN 'low hourly rate'
+	END as HourlyRate_1
+FROM employee;
+
+
+-- Part 3: Write a conditional logic with the following conditions:
+-- If “Gender” is “Female”, then make the records as an integer “0”
+-- If “Gender” is “Male”, then make the records as an integer “1”
+-- Return the “Gender” and the conditional logic result in the end
+
+SELECT Gender, 
+	CASE
+		WHEN Gender = 'Female' THEN 0
+		WHEN Gender = 'Male' THEN 1
+	END as Gender_1
+FROM employee;
+
+
+	
