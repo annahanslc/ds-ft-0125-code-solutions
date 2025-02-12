@@ -1,0 +1,53 @@
+-- Part 1: Table Creation/Insertion -- -- 
+
+Q1: Create a permanent table called ‘person_{your_name}’ in the “dsstudent” database. This table has 4 columns, ‘person_id’, ‘first_name’, ‘last_name’, ‘city’ (‘person_id’ is the primary key).
+CREATE TABLE person_anna
+	(person_id SMALLINT,
+	first_name VARCHAR(20),
+	last_name VARCHAR(20),
+	city VARCHAR(20),
+	CONSTRAINT pk_person PRIMARY KEY (person_id));
+
+Q2: Insert a row of data into this table.
+INSERT INTO person_anna (person_id,first_name,last_name,city)
+VALUES
+	(1,'Anna','Han','Santa Ana');
+
+Q3: Insert 2 rows of data into this table
+INSERT INTO person_anna
+	(person_id,first_name,last_name,city)
+VALUES
+	(2,'Sean','Hong','Santa Ana'),
+	(3,'Vera','Xiao','San Francisco');
+
+-- Part 2: Update Data in Table -- --
+
+Q1: Add a new column called ‘gender’ in the ‘person_{your_name}’ table.
+ALTER TABLE person_anna 
+ADD gender CHAR(1);
+
+Q2: Update data to this column
+UPDATE person_anna
+SET gender = 'F'
+WHERE first_name = 'Anna';
+
+UPDATE person_anna
+SET gender = 'M'
+WHERE first_name = 'Sean';
+
+UPDATE person_anna
+SET gender = 'F'
+WHERE first_name = 'Vera';
+
+-- Part 3: Delete data/drop table -- --
+
+Q1: Delete the column ‘gender’ from the ‘person_{your_name}’ table.
+ALTER TABLE person_anna 
+DROP COLUMN gender;
+
+Q2: Delete the row where ‘personal_id = 2’ from the ‘person_{your_name}’ table.
+DELETE FROM person_anna
+WHERE person_id = 2;
+
+Q3: Drop the ‘person_{your_name}’ table from the ’dsstudent’ database.
+DROP TABLE person_anna;
